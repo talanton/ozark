@@ -11,9 +11,9 @@ import ContactExtensiveActionsCard from './ContactExtensiveActionsCard';
 
 const CONTACT_EXTENSIVE_ACTIONS_CARDS = [
   {
-    title: 'Build a Demo App',
+    title: 'Get Demo',
     icon: GitHubIcon,
-    text: 'If you want to put fingers to the keyboard and to get started with Ockam, we have a bunch of step-by-step guides that will help you build your first application with Ockam.',
+    text: 'If you want to put fingers to the keyboard and to get started with apps provided by Talanton, we will provide you with a PoC.',
     actionText: `Let's Build`,
     actionLink: BUILD_DEMO.href,
     isExternal: true,
@@ -21,7 +21,7 @@ const CONTACT_EXTENSIVE_ACTIONS_CARDS = [
   {
     title: 'Join Our Team',
     icon: TeamIcon,
-    text: 'We recently raised a Series A, and are building our team. We are currently hiring Product Managers, Rust and Elixir engineers, and Customer support engineers.',
+    text: 'We are a remote-first company, and will soon be expanding our operations.',
     actionText: 'See the Open Roles',
     actionLink: TEAM_PATH,
   },

@@ -1,8 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
+import Head from 'next/head';
 
-import githubApi from '@api/githubApi';
-import cratesApi from '@api/cratesApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
 import {
@@ -14,50 +13,17 @@ import {
   Features,
   Cases,
   Packages,
-  Stats,
 } from '@views/homepage';
 import CONFIG from '@config';
 
-type HomePageProps = {
-  stars?: number;
-  contributors?: number;
-  downloads?: number;
-};
+// import Stats from '../views/homepage/Stats';
 
-export async function getStaticProps(): Promise<{ props: HomePageProps; revalidate: number }> {
-  try {
-    const { data: repoContentsData } = await githubApi.reposService.getRepoContents(
-      'ockam-contributors',
-      '/CONTRIBUTORS.csv'
-    );
-
-    const { data: repoData } = await githubApi.reposService.getRepo('ockam');
-
-    const responses = await cratesApi.cratesService.getProjects(CONFIG.crates.projectsNames);
-    const downloadsSum = responses
-      .map((resp) => resp.data.crate.downloads)
-      .reduce((partialSum, count) => partialSum + count, 0);
-
-    return {
-      props: {
-        stars: repoData?.stargazers_count,
-        contributors:
-          (Buffer.from(repoContentsData?.content, 'base64')
-            .toString()
-            .split(/\r\n|\r|\n/).length || 2) - 2, // minus column names first row and last empty row
-        downloads: downloadsSum,
-      },
-      revalidate: 120,
-    };
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error(e);
-    return { props: {}, revalidate: 120 };
-  }
-}
-
-const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, downloads }) => (
+const HomePage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 20 }}>
+    <Head>
+      <title>{CONFIG.app.title}</title>
+    </Head>
+
     <Hero />
     <Solution />
     <GetStarted />
@@ -66,9 +32,7 @@ const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, down
     <Features />
     <Cases />
     <Packages />
-    {stars && contributors && downloads && (
-      <Stats stars={stars} contributors={contributors} downloads={downloads} />
-    )}
+    {/* <Stats stars={1900} contributors={100} downloads={180000} /> */}
   </Box>
 );
 

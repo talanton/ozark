@@ -50,7 +50,7 @@ const ContactMainActionsCard: FunctionComponent<ContactMainActionsCardProps> = (
         mt="auto"
         colorScheme="avocado"
         size="md"
-        color="black"
+        color="white"
         w="full"
       >
         {link.text}
