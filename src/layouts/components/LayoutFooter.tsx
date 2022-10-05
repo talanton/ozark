@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import NextLink from 'next/link';
 import {
   Box,
   BoxProps,
@@ -8,7 +7,7 @@ import {
   Container,
   Flex,
   Heading,
-  Link as ChakraLink,
+  Link,
   Text,
   Icon,
   HStack,
@@ -16,17 +15,9 @@ import {
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
-import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
-import { CONTACT_PAGE_PATH } from '@consts/paths';
+import { LINKEDIN, TWITTER, SUPPORT, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
 
-const NAV = [
-  {
-    name: 'Support',
-    href: CONTACT_PAGE_PATH,
-    isExternal: false,
-  },
-  { ...DISCUSSION, isExternal: true },
-];
+const NAV = [SUPPORT, DISCUSSION];
 const SOCIALS = [LINKEDIN, TWITTER];
 
 const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
@@ -44,21 +35,21 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
         py={{ base: 10, lg: 16 }}
       >
         <Heading as="h3" size="h3" maxW="lg" mb={{ base: 9, lg: 0 }}>
-          Developers{' '}
+            Leading Quant Workshop{' '}
           <chakra.span bgImage={gradients.primary} bgClip="text">
-            Love Ockam
+            in Middle East & Africa 
           </chakra.span>
         </Heading>
 
         <Button
           as="a"
-          href={BUILD_DEMO.href}
+            href="https://drive.google.com/file/d/1SOWiMmK0hEcYJb-ynMb74wLRKzSzD4co/view?usp=sharing"
           target="_blank"
           colorScheme="avocado"
-          color="black"
+            color="white"
           size="lg"
         >
-          Build a Demo App
+            Explore Services
         </Button>
       </Flex>
 
@@ -79,7 +70,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
           />
 
           <Text opacity="0.8" fontSize={{ base: 'lg', lg: 'md' }}>
-            © 2022 Ockam.io All Rights Reserved
+              © 2022 Talanton Technologies L.L.C-FZ All Rights Reserved
           </Text>
         </Flex>
 
@@ -92,26 +83,23 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
         >
           <Flex mb={{ base: 4, lg: 0 }}>
             {NAV.map((link) => (
-              <ChakraLink
+              <Text
                 key={link.name}
+                as={Link}
+                isExternal
                 href={link.href}
-                {...(link.isExternal ? { isExternal: true } : { passHref: true, as: NextLink })}
+                _hover={{ textDecoration: 'underline' }}
+                opacity={0.8}
+                mr={6}
               >
-                <Text
-                  as={link.isExternal ? 'span' : 'a'}
-                  _hover={{ textDecoration: 'underline' }}
-                  opacity={0.8}
-                  mr={6}
-                >
-                  {link.name}
-                </Text>
-              </ChakraLink>
+                {link.name}
+              </Text>
             ))}
           </Flex>
 
           <HStack spacing={5}>
             {SOCIALS.map((social) => (
-              <ChakraLink key={social.href} href={social.href} isExternal>
+              <Link key={social.href} href={social.href} isExternal>
                 <Icon
                   as={social.icon}
                   alt={`${social.name} link`}
@@ -122,7 +110,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
                   _hover={{ color: 'gray.300' }}
                   transition="all 400ms ease-in-out"
                 />
-              </ChakraLink>
+              </Link>
             ))}
           </HStack>
         </Flex>
